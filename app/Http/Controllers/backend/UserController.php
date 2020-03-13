@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     function dsThanhVien() {
-        echo 'Danh sách thành viên';
+        return view('backend.user.listuser');
     }
 
     function dsDangKy() {
-        echo 'Danh sách đăng ký';
+        return view('backend.user.register_user');
     }
 
     function doiMatKhau() {
-        echo 'Đổi mật khẩu';
+        return view('backend.user.change_password');
     }
 }

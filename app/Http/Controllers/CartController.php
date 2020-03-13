@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     function gioHang() {
-        echo 'Giỏ hàng';
+        return view('cart.cart');
     }
     function thanhToan() {
-        echo 'Thanh toán';
+        return view('cart.checkout');
     }
     function hoanThanh(){
-        echo 'Hoàn thành thanh toán';
+        return view('cart.complete');
     }
 }

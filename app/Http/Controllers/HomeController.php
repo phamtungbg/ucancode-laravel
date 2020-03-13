@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     function trangChu() {
-        echo 'Trang chủ';
+        return view('index');
     }
     function thongTin() {
-        echo 'Thông tin';
+        return view('about');
     }
     function lienHe() {
-        echo 'Liên hệ';
+        return view('contact');
     }
 }

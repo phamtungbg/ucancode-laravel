@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 class ShopController extends Controller
 {
     function cuaHang() {
-        echo 'Cửa hàng';
+        return view('shop.shop');
     }
     function ctSanPham() {
-        echo 'Chi tiết sản phẩm';
+        return view('shop.product_single');
     }
     function spUaThich() {
-        echo 'Sản phẩm ưa thích';
+        return view('shop.wishlist');
     }
 }

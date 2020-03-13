@@ -9,7 +9,14 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    
+    protected $table = 'thanh_vien';
+    public $timestamps = false;
 
+    public function tinTuc()
+    {
+        return $this->hasMany('App\models\tin_tuc', 'thanh_vien_id', 'id');
+    }
     /**
      * The attributes that are mass assignable.
      *

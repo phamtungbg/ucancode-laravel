@@ -40,20 +40,20 @@
 										</tr>
 									</thead>
 									<tbody>
-
-
-
+                                        @foreach ($user as $item)
 										<tr>
-											<td>1</td>
-											<td>Admin@gmail.com</td>
-											<td>Admin</td>
+                                            <td>{{$item->id}}</td>
+                                            <td>{{$item->email}}</td>
+                                            <td>{{$item->ho_ten}}</td>
 											<td>
 												<a href="#" class="btn btn-primary"><i class="fa fa-pencil"
 														aria-hidden="true"></i> Xác nhận</a>
 												<a href="#" class="btn btn-danger"><i class="fa fa-trash"
 														aria-hidden="true"></i> Xóa</a>
 											</td>
-										</tr>
+                                        </tr>
+                                        @endforeach
+
 									</tbody>
 								</table>
 								<div align='right'>

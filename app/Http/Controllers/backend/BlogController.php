@@ -5,13 +5,15 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddBlogRequest;
 use App\Http\Requests\EditBlogRequest;
+use App\models\tin_tuc;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
     function tinTuc(Request $r) {
-        dd($r->all());
-        return view('backend.blog.blog');
+        // dd($r->all());
+        $data['tinTuc'] = tin_tuc::all();
+        return view('backend.blog.blog',$data);
     }
     function themTinTuc() {
         return view('backend.blog.addblog');

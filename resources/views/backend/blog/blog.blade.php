@@ -29,32 +29,13 @@
                         <div class="bootstrap-table">
                             <div class="table-responsive">
                                 <a href="addblog.html" class="btn btn-primary">Thêm tin tức</a>
+                              
                                 <div class="alert bg-success" role="alert">
                                     <svg class="glyph stroked checkmark">
                                         <use xlink:href="#stroked-checkmark"></use>
                                     </svg>Đã thêm thành công<a href="#" class="pull-right"><span
                                             class="glyphicon glyphicon-remove"></span></a>
                                 </div>
-
-
-                                <form method="POST">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label for="">Tìm theo danh mục: </label>
-                                                <select class="form-control" name="danh_muc" id="">
-                                                    <option>Tin tức</option>
-                                                    <option>---|Trái cây</option>
-                                                    <option>---|Nước ép</option>
-                                                    <option>---|Rau củ</option>
-                                                    <option>---|Đồ khô</option>
-                                                </select>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                                        </div>
-
-                                    </div>
-                                </form>
 
                                 <table class="table table-bordered" style="margin-top:20px;">
 
@@ -69,21 +50,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($tinTuc as $item)
                                         <tr>
-                                            <td>1</td>
+                                            <td>{{$item->id}}</td>
                                             <td>
                                                 <div class="row">
-                                                    <div class="col-md-3"><img src="upload/dau-tay-1.jpg" alt="Áo đẹp"
+                                                    <div class="col-md-3"><img src="/{{$item->link_anh}}" alt="Áo đẹp"
                                                             width="100px" class="thumbnail"></div>
                                                     <div class="col-md-9">
-                                                        <p> <strong>Những trái hoa quả tốt cho sức khỏe</strong> </p>
-                                                        <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
+                                                        <p> <strong>{{$item->tieu_de}}</strong> </p>
+                                                        <p>{{$item->mieu_ta}}</p>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>Trái cây</td>
-                                            <td>Admin</td>
-                                            <td>3-3-2020</td>
+                                            <td>{{$item->danhMuc->ten}}</td>
+                                            <td>{{$item->thanhVien->ten}}</td>
+                                            <td>{{$item->created_at->format('M-d-Y')}}</td>
                                             <td>
                                                 <a href="editblog.html" class="btn btn-warning"><i class="fa fa-pencil"
                                                         aria-hidden="true"></i> Sửa</a>
@@ -91,28 +73,7 @@
                                                         aria-hidden="true"></i> Xóa</a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-3"><img src="upload/dau-tay-1.jpg" alt="Áo đẹp"
-                                                            width="100px" class="thumbnail"></div>
-                                                    <div class="col-md-9">
-                                                        <p> <strong>Những trái hoa quả tốt cho sức khỏe</strong> </p>
-                                                        <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Trái cây</td>
-                                            <td>Admin</td>
-                                            <td>3-3-2020</td>
-                                            <td>
-                                                <a href="#" class="btn btn-warning"><i class="fa fa-pencil"
-                                                        aria-hidden="true"></i> Sửa</a>
-                                                <a href="#" class="btn btn-danger"><i class="fa fa-trash"
-                                                        aria-hidden="true"></i> Xóa</a>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 <div align='right'>

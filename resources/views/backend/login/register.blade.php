@@ -18,23 +18,28 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Đăng ký</div>
 				<div class="panel-body">
-					<form role="form">
+					<form role="form" method="POST">
+                        @csrf
 						<fieldset>
 							<div class="form-group">
                                 <p><span><strong>Email</strong></span></p>
-								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+                                {{hienLoi($errors,'email')}}
 							</div>
 							<div class="form-group">
                                 <p><span><strong>Password</strong></span></p>
-								<input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                {{hienLoi($errors,'password')}}
 							</div>
 							<div class="form-group">
                                 <p><span><strong>Nhập lại Password</strong></span></p>
-								<input class="form-control" placeholder="Nhập lại Password" name="password_conf" type="password" value="">
+                                <input class="form-control" placeholder="Nhập lại Password" name="password_conf" type="password" value="">
+                                {{hienLoi($errors,'password_conf')}}
                             </div>
                             <div class="form-group">
                                 <p><span><strong>Họ tên</strong></span></p>
-								<input class="form-control" placeholder="Họ tên" name="ho_ten" type="text" value="">
+                                <input class="form-control" placeholder="Họ tên" name="ho_ten" type="text" value="">
+                                {{hienLoi($errors,'ho_ten')}}
 							</div>
 							<div class="row">
 								<div class="col-md-4">

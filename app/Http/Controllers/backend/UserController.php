@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -17,5 +18,8 @@ class UserController extends Controller
 
     function doiMatKhau() {
         return view('backend.user.change_password');
+    }
+    function postDoiMatKhau(ChangePasswordRequest $r){
+
     }
 }

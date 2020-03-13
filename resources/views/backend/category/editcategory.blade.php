@@ -24,6 +24,8 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                @csrf
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="">Danh mục cha:</label>
@@ -40,6 +42,7 @@
                                     <label for="">Tên Danh mục</label>
                                     <input type="text" class="form-control" name="ten" id=""
                                         value="Dâu tây">
+                                        {{hienLoi($errors,'ten')}}
 
                                     <div class="alert bg-danger" role="alert">
                                         <svg class="glyph stroked cancel">
@@ -53,10 +56,12 @@
                                     <label>Ảnh danh mục</label>
                                     <input id="img" type="file" name="anh" class="form-control hidden"
                                         onchange="changeImg(this)">
+                                        {{hienLoi($errors,'anh')}}
                                     <img id="avatar" class="thumbnail" width="100%" height="400px" src="upload/trai-cay-2.jpg">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Sửa danh mục</button>
                             </div>
+                        </form>
                             <div class="col-md-7">
                                 <div class="alert bg-success" role="alert">
                                     <svg class="glyph stroked checkmark">

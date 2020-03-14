@@ -33,6 +33,7 @@ Route::group(['prefix' => 'shop'], function () {
     Route::get('{dmSlug}/{dmId}', 'ShopController@dmCuaHang');
     Route::get('product-single', 'ShopController@ctSanPham');
     Route::get('wishlist','ShopController@spUaThich');
+    Route::post('wishlist','ShopController@postUaThich');
 });
 
 

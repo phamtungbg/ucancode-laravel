@@ -58,7 +58,7 @@
                                 <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                     <span><i class="ion-ios-cart"></i></span>
                                 </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                <a onclick="return wishlist('{{$item->ten}}','{{$item->id}}')" class="heart d-flex justify-content-center align-items-center ">
                                     <span><i class="ion-ios-heart"></i></span>
                                 </a>
                             </div>
@@ -107,5 +107,26 @@
 @endsection
 @section('script')
     @parent
+    <script>
+        function wishlist(ten,id) {
+            localStorage.setItem(ten, id);
+            alert('Đã thêm vào wishlist');
 
+            var id = [];
+            for ( var i = 0, leng = localStorage.length; i < leng; i++ ) {
+                id.push(localStorage.getItem(localStorage.key(i))) ;
+                }
+                console.log(id);
+
+            $.post(
+                "/shop/wishlist",
+                {id:id,
+                "_token": "{{ csrf_token() }}"},
+                function(data){
+                    // window.location.reload();
+                }
+            )
+            return false;
+        }
+    </script>
 @endsection

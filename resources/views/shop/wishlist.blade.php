@@ -29,75 +29,34 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                            @if (session()->has('id'))
+
+                                @foreach ($sanPham as $item)
                                 <tr class="text-center">
-                                    <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                                    <td class="product-remove"><a onclick="return delWishlist('{{$item->ten}}')" href="/shop/wishlist"><span class="ion-ios-close"></span></a></td>
 
                                     <td class="image-prod">
-                                        <div class="img" style="background-image:url(images/product-1.jpg);"></div>
+                                        <div class="img" style="background-image:url(/{{$item->link_anh}});"></div>
                                     </td>
 
                                     <td class="product-name">
-                                        <h3>Ớt chuông</h3>
-                                        <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                            chọn lọc từ nguồn cung cấp uy tín</p>
+                                        <h3>{{$item->ten}}</h3>
+                                    <p>{{$item->mieu_ta}}</p>
                                     </td>
-
-                                    <td class="price">$4.90</td>
-
-
+                                    @if ($item->giam_gia!='')
+                                    <td class="price">{{number_format($item->gia*(100-$item->giam_gia)/100,0,'','.')}} VND</td>
+                                    @else
+                                    <td class="price">{{number_format($item->gia,0,'','.')}} VND</td>
+                                    @endif
                                 </tr><!-- END TR-->
-
+                                @endforeach
+                            @else
                                 <tr class="text-center">
-                                    <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                                    <td><h3>Không có sản phẩm nào trong wishlist</h3></td>
+                                </tr>
+                            @endif
 
-                                    <td class="image-prod">
-                                        <div class="img" style="background-image:url(images/product-1.jpg);"></div>
-                                    </td>
-
-                                    <td class="product-name">
-                                        <h3>Ớt chuông</h3>
-                                        <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                            chọn lọc từ nguồn cung cấp uy tín</p>
-                                    </td>
-
-                                    <td class="price">$4.90</td>
-
-
-                                </tr><!-- END TR-->
-                                <tr class="text-center">
-                                    <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-
-                                    <td class="image-prod">
-                                        <div class="img" style="background-image:url(images/product-1.jpg);"></div>
-                                    </td>
-
-                                    <td class="product-name">
-                                        <h3>Ớt chuông</h3>
-                                        <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                            chọn lọc từ nguồn cung cấp uy tín</p>
-                                    </td>
-
-                                    <td class="price">$4.90</td>
-
-
-                                </tr><!-- END TR-->
-                                <tr class="text-center">
-                                    <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-
-                                    <td class="image-prod">
-                                        <div class="img" style="background-image:url(images/product-1.jpg);"></div>
-                                    </td>
-
-                                    <td class="product-name">
-                                        <h3>Ớt chuông</h3>
-                                        <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                            chọn lọc từ nguồn cung cấp uy tín</p>
-                                    </td>
-
-                                    <td class="price">$4.90</td>
-
-
-                                </tr><!-- END TR-->
                             </tbody>
                         </table>
                     </div>
@@ -163,5 +122,29 @@
             });
 
         });
+    </script>
+    <script>
+        function delWishlist(ten) {
+            localStorage.removeItem(ten);
+            alert('Đã xóa ' +ten+ ' khỏi wishlist');
+
+            $.ajaxSetup({ cache: false });
+            var id = [];
+            for ( var i = 0, leng = localStorage.length; i < leng; i++ ) {
+                id.push(localStorage.getItem(localStorage.key(i))) ;
+                }
+                console.log(id);
+
+            $.post(
+                "/shop/wishlist",
+                {id:id,
+                "_token": "{{ csrf_token() }}"},
+                function(data){
+                    window.location.reload();
+                }
+            )
+            return false;
+
+        }
     </script>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -19,10 +20,19 @@ class UserController extends Controller
         return view('backend.user.register_user',$data);
     }
 
-    function doiMatKhau() {
+    function doiMatKhau($idUser){
         return view('backend.user.change_password');
     }
-    function postDoiMatKhau(ChangePasswordRequest $r){
+    function postDoiMatKhau($idUser,ChangePasswordRequest $r){
+        $user = User::find($idUser);
+
+        if (Hash::check($r->password, $user->password)) {
+            $user->password = bcrypt($r->new_password);
+            $user->save();
+            return redirect('/admin/user')->with('thongBao','Đã thay đổi mật khẩu thành công');
+        } else {
+           return redirect()->back()->withErrors(['password'=>'Mật khẩu không chính xác']);
+        }
 
     }
 

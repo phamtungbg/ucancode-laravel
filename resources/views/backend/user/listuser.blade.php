@@ -56,7 +56,7 @@
                                             <td>{{$item->ho_ten}}</td>
                                             <td>{{$item->quyen}}</td>
 											<td>
-												<a href="#" class="btn btn-warning"><i class="fa fa-pencil"
+												<a href="/admin/user/change-password/{{$item->id}}" class="btn btn-warning"><i class="fa fa-pencil"
 														aria-hidden="true"></i> Đổi mật khẩu</a>
 												<a href="admin/user/del/{{$item->id}}" class="btn btn-danger"><i class="fa fa-trash"
 														aria-hidden="true"></i> Xóa</a>

@@ -97,7 +97,7 @@ Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
         Route::get('register', 'backend\UserController@dsDangKy');
         Route::get('accept/{idUser}', 'backend\UserController@chapNhan');
         Route::get('del/{idUser}', 'backend\UserController@xoaThanhVien');
-        Route::get('change-password', 'backend\UserController@doiMatKhau');
-        Route::post('change-password', 'backend\UserController@postDoiMatKhau');
+        Route::get('change-password/{idUser}', 'backend\UserController@doiMatKhau');
+        Route::post('change-password/{idUser}', 'backend\UserController@postDoiMatKhau');
     });
 });

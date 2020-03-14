@@ -25,4 +25,16 @@ class UserController extends Controller
     function postDoiMatKhau(ChangePasswordRequest $r){
 
     }
+
+    function delThanhVien($idUser){
+        $data['user'] = User::find($idUser)->delete();
+        return redirect('/admin/user')->with('thongBao','Đã xóa thành công');
+
+    }
+    function chapNhan($idUser){
+        $user = User::find($idUser);
+        $user->trang_thai = 1;
+        $user->save();
+        return redirect('/admin/user')->with('thongBao','Đã chấp nhận thành viên mới');
+    }
 }

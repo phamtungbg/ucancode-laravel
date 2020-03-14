@@ -43,12 +43,11 @@
 							</div>
 							<div class="row">
 								<div class="col-md-4">
-									<a href="login.html" class="btn btn-success">Quay lại login</a>
+									<a href="/login" class="btn btn-success">Quay lại login</a>
 
 								</div>
 								<div class="col-md-8 text-right">
-									<a href="index.html" class="btn btn-primary">Đăng ký </a>
-
+                                    <button type="submit" class="btn btn-primary">Đăng ký </button>
 								</div>
 							</div>
 							</div>

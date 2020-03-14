@@ -46,9 +46,9 @@
                                             <td>{{$item->email}}</td>
                                             <td>{{$item->ho_ten}}</td>
 											<td>
-												<a href="#" class="btn btn-primary"><i class="fa fa-pencil"
+												<a href="admin/user/accept/{{$item->id}}" class="btn btn-primary"><i class="fa fa-pencil"
 														aria-hidden="true"></i> Xác nhận</a>
-												<a href="#" class="btn btn-danger"><i class="fa fa-trash"
+												<a href="admin/user/del/{{$item->id}}" class="btn btn-danger"><i class="fa fa-trash"
 														aria-hidden="true"></i> Xóa</a>
 											</td>
                                         </tr>

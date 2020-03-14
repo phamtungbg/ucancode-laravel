@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -31,7 +32,14 @@ class LoginController extends Controller
         return view('backend.login.register');
     }
     function postDangKy(RegisterRequest $r){
-
+        $user = new User;
+        $user->email=$r->email;
+        $user->password=bcrypt($r->password);
+        $user->ho_ten=$r->ho_ten;
+        $user->quyen = 0;
+        $user->trang_thai=0;
+        $user->save();
+        return redirect('login')->with('thongBao','Bạn đã đăng ký thành công hãy chờ người kiểm duyệt xác nhận');
     }
 
     function quenMatKhau() {

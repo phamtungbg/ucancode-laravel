@@ -18,6 +18,11 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
+                    @if (session('thongBao'))
+                        <div class="alert alert-success" role="alert">
+                            <strong>{{session('thongBao')}}</strong>
+                        </div>
+                    @endif
 					<form role="form" method="POST">
                         @csrf
 						<fieldset>
@@ -40,8 +45,8 @@
 
 								</div>
 								<div class="col-md-8 text-right">
-									<a href="register.html" class="btn btn-success">Đăng ký</a>
-									<a href="index.html" class="btn btn-danger">Quên mật khẩu</a>
+									<a href="/register" class="btn btn-success">Đăng ký</a>
+									<a href="/forget-password" class="btn btn-danger">Quên mật khẩu</a>
 								</div>
 							</div>
 

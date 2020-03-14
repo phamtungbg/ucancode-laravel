@@ -47,15 +47,16 @@ Route::group(['prefix' => 'cart'], function () {
 
 //BACKEND
 //login
-Route::get('login','backend\LoginController@dangNhap' );
+Route::get('login','backend\LoginController@dangNhap' )->middleware('CheckLogout');;
 Route::post('login','backend\LoginController@postDangNhap' );
+Route::get('logout','backend\LoginController@dangXuat');
 Route::get('register', 'backend\LoginController@dangKy');
 Route::post('register', 'backend\LoginController@postDangKy');
 Route::get('forget-password', 'backend\LoginController@quenMatKhau');
 Route::post('forget-password', 'backend\LoginController@postQuenMatKhau');
 
 //admin
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
     Route::get('', 'backend\IndexController@admin');
 
     //category

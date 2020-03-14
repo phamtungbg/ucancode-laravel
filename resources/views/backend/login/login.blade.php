@@ -22,7 +22,7 @@
                         @csrf
 						<fieldset>
 							<div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" value="{{old('email')}}">
                                 {{hienLoi($errors,'email')}}
 							</div>
 							<div class="form-group">
@@ -36,7 +36,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-4">
-									<a href="index.html" class="btn btn-primary">Login</a>
+									<button type="submit" class="btn btn-primary">Login</button>
 
 								</div>
 								<div class="col-md-8 text-right">

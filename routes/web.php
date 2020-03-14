@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 //Blog
 Route::group(['prefix' => 'blog'], function () {
     Route::get('','BlogController@tinTuc');
+    Route::get('{slugDm}','BlogController@tinTucDm');
     Route::get('blog-single', 'BlogController@ctTinTuc');
 });
 
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'blog'], function () {
 //Shop
 Route::group(['prefix' => 'shop'], function () {
     Route::get('', 'ShopController@cuaHang');
+    Route::get('{dmSlug}/{dmId}', 'ShopController@dmCuaHang');
     Route::get('product-single', 'ShopController@ctSanPham');
     Route::get('wishlist','ShopController@spUaThich');
 });

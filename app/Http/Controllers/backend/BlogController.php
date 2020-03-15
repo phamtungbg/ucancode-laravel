@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddBlogRequest;
 use App\Http\Requests\EditBlogRequest;
+use App\models\danh_muc;
 use App\models\tin_tuc;
 use Auth;
 use Illuminate\Support\Str;
@@ -18,7 +19,8 @@ class BlogController extends Controller
         return view('backend.blog.blog',$data);
     }
     function themTinTuc() {
-        return view('backend.blog.addblog');
+        $data['allDanhmuc'] = danh_muc::where('loai_danh_muc',1)->get();
+        return view('backend.blog.addblog',$data);
     }
     function postThemTinTuc(AddBlogRequest $r){
         // dd($r->all());
@@ -44,6 +46,7 @@ class BlogController extends Controller
     }
     function suaTinTuc($idTin) {
         $data['tinTuc'] = tin_tuc::find($idTin);
+        $data['allDanhmuc'] = danh_muc::where('loai_danh_muc',1)->get();
         return view('backend.blog.editblog',$data);
     }
     function postSuaTinTuc(EditBlogRequest $r,$idTin){

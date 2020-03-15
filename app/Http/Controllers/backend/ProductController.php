@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\EditProductRequest;
+use App\models\danh_muc;
 use App\models\san_pham;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class ProductController extends Controller
     }
 
     function themSanPham() {
-        return view('backend.product.addproduct');
+        $data['allDanhMuc'] = danh_muc::where('loai_danh_muc',0)->get();
+        return view('backend.product.addproduct',$data);
     }
     function postThemSanPham(AddProductRequest $r) {
         // dd($r->all());
@@ -45,6 +47,7 @@ class ProductController extends Controller
     }
 
     function suaSanPham($idSp) {
+        $data['allDanhMuc'] = danh_muc::where('loai_danh_muc',0)->get();
         $data['sanPham'] = san_pham::find($idSp);
         return view('backend.product.editproduct',$data);
     }

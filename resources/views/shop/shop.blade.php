@@ -19,9 +19,9 @@
             <div class="row justify-content-center">
                 <div class="col-md-10 mb-5 text-center">
                     <ul class="product-category">
-                        <li><a class="active">Tất cả</a></li>
+                        <li><a href="/shop" @if ($activeDm==0) class="active" @endif>Tất cả</a></li>
                     @foreach ($danhMuc as $item)
-                    <li><a href="#">{{$item->ten}}</a></li>
+                    <li><a @if ($activeDm==$item->id) class="active" @endif href="/shop/{{$item->link_slug}}/{{$item->id}}">{{$item->ten}}</a></li>
                     @endforeach
                     </ul>
                 </div>
@@ -30,7 +30,7 @@
                 @foreach ($sanPham as $item)
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="/{{$item->link_anh}}"
+                    <a href="/{{$item->link_slug}}-{{$item->id}}.html" class="img-prod"><img class="img-fluid" src="/{{$item->link_anh}}"
                             alt="Colorlib Template">
                             @if ($item->giam_gia!='')
                             <span class="status">{{$item->giam_gia}}%</span>
@@ -38,7 +38,7 @@
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">{{$item->ten}}</a></h3>
+                        <h3><a href="/{{$item->link_slug}}-{{$item->id}}.html">{{$item->ten}}</a></h3>
                         <div class="d-flex">
                             <div class="pricing">
                                 <p class="price"><span @if ($item->giam_gia!='') class="mr-2 price-dc" @endif>{{number_format($item->gia,0,'','.')}} VND</span>
@@ -51,14 +51,14 @@
                         </div>
                         <div class="bottom-area d-flex px-3">
                             <div class="m-auto d-flex">
-                                <a href="#"
+                                <a href="/{{$item->link_slug}}-{{$item->id}}.html"
                                     class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                     <span><i class="ion-ios-menu"></i></span>
                                 </a>
                                 <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                     <span><i class="ion-ios-cart"></i></span>
                                 </a>
-                                <a onclick="return wishlist('{{$item->ten}}','{{$item->id}}')" class="heart d-flex justify-content-center align-items-center ">
+                                <a onclick="return wishlist('{{$item->ten}}','{{$item->id}}')" href="/" class="heart d-flex justify-content-center align-items-center ">
                                     <span><i class="ion-ios-heart"></i></span>
                                 </a>
                             </div>

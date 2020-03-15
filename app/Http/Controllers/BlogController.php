@@ -29,7 +29,12 @@ class BlogController extends Controller
         return view('blog.blog',$data);
     }
 
-    function ctTinTuc() {
-        return view('blog.blog_single');
+    function ctTinTuc($slugTt,$idDm) {
+        $mang = explode('-',$slugTt);
+        $idDm = array_pop($mang);
+        $data['tinTuc'] = tin_tuc::find($idDm);
+        $data['danhMuc'] = danh_muc::where('loai_danh_muc',1)->where('id_cha','<>',0)->get();
+        $data['ttMoi'] = tin_tuc::where('link_anh','<>','no-img.jpg')->orderBy('created_at','desc')->take(3)->get();
+        return view('blog.blog_single',$data);
     }
 }

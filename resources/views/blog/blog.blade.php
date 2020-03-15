@@ -21,18 +21,18 @@
                         @foreach ($tinTuc as $item)
                         <div class="col-md-12 d-flex ftco-animate">
                             <div class="blog-entry align-self-stretch d-md-flex">
-                                <a href="blog-single.html" class="block-20"
+                                <a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}" class="block-20"
                                     style="background-image: url('/{{$item->link_anh}}');">
                                 </a>
                                 <div class="text d-block pl-md-4">
                                     <div class="meta mb-3">
-                                        <div><a href="#">{{$item->created_at->format('M-d-Y')}}</a></div>
-                                        <div><a href="#">{{$item->thanhVien->ho_ten}}</a></div>
-                                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                                        <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}">{{$item->created_at->format('M-d-Y')}}</a></div>
+                                        <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}">{{$item->thanhVien->ho_ten}}</a></div>
+                                        <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                                     </div>
-                                    <h3 class="heading"><a href="#">{{$item->tieu_de}}</a></h3>
+                                    <h3 class="heading"><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}">{{$item->tieu_de}}</a></h3>
                                     <p>{{$item->mo_ta}}</p>
-                                    <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Xem thêm</a></p>
+                                    <p><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}" class="btn btn-primary py-2 px-3">Xem thêm</a></p>
                                 </div>
                             </div>
                         </div>
@@ -41,10 +41,10 @@
                 </div> <!-- .col-md-8 -->
                 <div class="col-lg-4 sidebar ftco-animate">
                     <div class="sidebar-box">
-                        <form action="#" class="search-form">
+                        <form method="GET" class="search-form" id="tim-kiem">
                             <div class="form-group">
                                 <span class="icon ion-ios-search"></span>
-                                <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                                <input onchange="return search()" type="text" class="form-control" name="tuKhoa" placeholder="Tìm kiếm..." value="">
                             </div>
                         </form>
                     </div>
@@ -52,26 +52,26 @@
                         <h3 class="heading">Danh mục</h3>
                         <ul class="categories">
                             @foreach ($danhMuc as $item)
-                            <li><a href="#">{{$item->ten}} <span>({{$item->tinTuc->count()}})</span></a></li>
-                        @endforeach
+                            <li><a href="/blog/{{$item->link_slug}}-{{$item->id}}">{{$item->ten}} <span>({{$item->tinTuc->count()}})</span></a></li>
+                            @endforeach
                         </ul>
                     </div>
 
                     <div class="sidebar-box ftco-animate">
                         <h3 class="heading">Bài viết gần đây</h3>
                         @foreach ($ttMoi as $item)
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(/{{$item->link_anh}});"></a>
-                        <div class="text">
-                            <h3 class="heading-1"><a href="#">{{$item->tieu_de}}</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> {{$item->created_at->format('M-d-Y')}}</a></div>
-                                <div><a href="#"><span class="icon-person"></span> {{$item->thanhVien->ho_ten}}</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(/{{$item->link_anh}});"></a>
+                            <div class="text">
+                                <h3 class="heading-1"><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}">{{$item->tieu_de}}</a></h3>
+                                <div class="meta">
+                                    <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}"><span class="icon-calendar"></span> {{$item->created_at->format('M-d-Y')}}</a></div>
+                                    <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}"><span class="icon-person"></span> {{$item->thanhVien->ho_ten}}</a></div>
+                                    <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}"><span class="icon-chat"></span> 19</a></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @endforeach
+                        @endforeach
                     </div>
 
                     <div class="sidebar-box ftco-animate">
@@ -102,6 +102,10 @@
 @endsection
 @section('script')
     @parent
-
+    <script>
+        function search() {
+            return document.getElementById("tim-kiem").submit();
+        }
+    </script>
 @endsection
 

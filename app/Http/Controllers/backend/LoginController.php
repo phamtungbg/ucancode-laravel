@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
+use Mail;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -46,6 +48,24 @@ class LoginController extends Controller
         return view('backend.login.forget_password');
     }
     function postQuenMatKhau(Request $r){
+        $user = User::where('email',$r->email)->first();
+
+        if($user){
+            $password = Str::random(10);
+
+            $user->password =  bcrypt($password);
+            $user->save();
+            $data['password'] = $password;
+            Mail::send('backend.mail.mail', $data, function ($message) use ($user) {
+                $message->from('dkmcnm@gmail.com', 'UCANCODE vegefoot');
+                $message->to($user->email, 'Thành viên');
+                $message->subject('Lấy lại mật khẩu');
+
+            });
+            return redirect('forget-password')->with('thongBao','Password mới sẽ được gửi vào email đăng ký của bạn!');
+        }else{
+            return redirect('forget-password')->withErrors(['email'=>'email không tồn tại']);
+        }
 
     }
 }

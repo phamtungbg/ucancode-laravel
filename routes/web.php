@@ -73,8 +73,9 @@ Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
         Route::get('', 'backend\ProductController@sanPham');
         Route::get('add', 'backend\ProductController@themSanPham');
         Route::post('add', 'backend\ProductController@postThemSanPham');
-        Route::get('edit', 'backend\ProductController@suaSanPham');
-        Route::post('edit', 'backend\ProductController@postSuaSanPham');
+        Route::get('edit/{idSp}', 'backend\ProductController@suaSanPham');
+        Route::post('edit/{idSp}', 'backend\ProductController@postSuaSanPham');
+        Route::get('del/{idSp}', 'backend\ProductController@xoaSanPham');
     });
 
     //blog
@@ -82,8 +83,9 @@ Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
         Route::get('', 'backend\BlogController@tinTuc');
         Route::get('add', 'backend\BlogController@themTinTuc');
         Route::post('add', 'backend\BlogController@postThemTinTuc');
-        Route::get('edit', 'backend\BlogController@suaTinTuc');
-        Route::post('edit', 'backend\BlogController@postSuaTinTuc');
+        Route::get('edit/{idTin}', 'backend\BlogController@suaTinTuc');
+        Route::post('edit/{idTin}', 'backend\BlogController@postSuaTinTuc');
+        Route::get('del/{idTin}', 'backend\BlogController@xoaTinTuc');
     });
 
     //order

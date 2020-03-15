@@ -28,14 +28,16 @@
                     <div class="panel-body">
                         <div class="bootstrap-table">
                             <div class="table-responsive">
-                                <a href="addblog.html" class="btn btn-primary">Thêm tin tức</a>
-                              
+                                <a href="/admin/blog/add" class="btn btn-primary">Thêm tin tức</a>
+
+                                @if (session('thongBao'))
                                 <div class="alert bg-success" role="alert">
                                     <svg class="glyph stroked checkmark">
                                         <use xlink:href="#stroked-checkmark"></use>
-                                    </svg>Đã thêm thành công<a href="#" class="pull-right"><span
+                                    </svg>{{session('thongBao')}}<a href="#" class="pull-right"><span
                                             class="glyphicon glyphicon-remove"></span></a>
                                 </div>
+                                @endif
 
                                 <table class="table table-bordered" style="margin-top:20px;">
 
@@ -67,10 +69,10 @@
                                             <td>{{$item->thanhVien->ten}}</td>
                                             <td>{{$item->created_at->format('M-d-Y')}}</td>
                                             <td>
-                                                <a href="editblog.html" class="btn btn-warning"><i class="fa fa-pencil"
-                                                        aria-hidden="true"></i> Sửa</a>
-                                                <a href="#" class="btn btn-danger"><i class="fa fa-trash"
-                                                        aria-hidden="true"></i> Xóa</a>
+                                                <a href="/admin/blog/edit/{{$item->id}}" class="btn btn-warning"><i class="fa fa-pencil"
+                                                    aria-hidden="true"></i> Sửa</a>
+                                            <a onclick="return hoiXoa('{{$item->tieu_de}}')" href="/admin/blog/del/{{$item->id}}" class="btn btn-danger"><i class="fa fa-trash"
+                                                    aria-hidden="true"></i> Xóa</a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -100,5 +102,9 @@
 @endsection
 @section('script')
     @parent
-
+    <script>
+        function hoiXoa(tieu_de){
+            return confirm('Bạn có muốn xóa tin tức '+tieu_de+' này không ?');
+        }
+    </script>
 @endsection

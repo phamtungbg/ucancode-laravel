@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddBlogRequest;
 use App\Http\Requests\EditBlogRequest;
 use App\models\tin_tuc;
+use Auth;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -19,12 +21,60 @@ class BlogController extends Controller
         return view('backend.blog.addblog');
     }
     function postThemTinTuc(AddBlogRequest $r){
-        dd($r->all());
+        // dd($r->all());
+        $tinTuc = new tin_tuc;
+        $tinTuc->tieu_de=$r->tieu_de;
+        $tinTuc->mo_ta=$r->mo_ta;
+        $tinTuc->noi_dung=$r->noi_dung;
+        $tinTuc->link_slug=Str::slug($r->tieu_de, '-');
+        $tinTuc->the_tag=$r->the_tag;
+        $tinTuc->danh_muc_id=$r->danh_muc;
+        $tinTuc->thanh_vien_id=Auth::user()->id;
+        $tinTuc->save();
+        if ($r->hasFile('anh')) {
+            $file = $r->anh;
+            $tenFile='tin-tuc-'.$tinTuc->id.'.'.$file->extension();
+            $path = $file->storeAs('upload',$tenFile,'upload');
+            $tinTuc->link_anh =  $path;
+        }else {
+            $tinTuc->link_anh='upload/no-img.jpg';
+        }
+        $tinTuc->save();
+        return redirect('/admin/blog')->with('thongBao','Đã thêm thành công');
     }
-    function suaTinTuc() {
-        return view('backend.blog.editblog');
+    function suaTinTuc($idTin) {
+        $data['tinTuc'] = tin_tuc::find($idTin);
+        return view('backend.blog.editblog',$data);
     }
-    function postSuaTinTuc(EditBlogRequest $r){
-        dd($r->all());
+    function postSuaTinTuc(EditBlogRequest $r,$idTin){
+        // dd($r->all());
+        $tinTuc = tin_tuc::find($idTin);;
+        $tinTuc->tieu_de=$r->tieu_de;
+        $tinTuc->mo_ta=$r->mo_ta;
+        $tinTuc->noi_dung=$r->noi_dung;
+        $tinTuc->link_slug=Str::slug($r->tieu_de, '-');
+        $tinTuc->the_tag=$r->the_tag;
+        $tinTuc->danh_muc_id=$r->danh_muc;
+        $tinTuc->thanh_vien_id=Auth::user()->id;
+        if ($r->hasFile('anh')) {
+            if ($tinTuc->link_anh!='upload/no-img.jpg') {
+                unlink($tinTuc->link_anh);
+            }
+            $file = $r->anh;
+            $tenFile='tin-tuc-'.$tinTuc->id.'.'.$file->extension();
+            $path = $file->storeAs('upload',$tenFile,'upload');
+            $tinTuc->link_anh =  $path;
+        }
+        $tinTuc->save();
+        return redirect('/admin/blog')->with('thongBao','Đã sửa thành công');
+    }
+
+    function xoaTinTuc($idTin){
+        $tinTuc = tin_tuc::find($idTin);
+        if ($tinTuc->link_anh!='upload/no-img.jpg') {
+            unlink($tinTuc->link_anh);
+        }
+        $tinTuc->delete();
+        return redirect('/admin/blog')->with('thongBao','Đã xóa thành công');
     }
 }

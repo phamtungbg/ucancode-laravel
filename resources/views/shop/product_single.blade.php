@@ -42,6 +42,7 @@
                     <p class="price"><span>{{number_format($sanPham->gia-($sanPham->gia*$sanPham->giam_gia/100),0,'','.')}} VND</span></p>
                     <p>{{$sanPham->mieu_ta}}
                     </p>
+                    <form action="/cart/add" method="get" id="them-gio">
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <div class="form-group d-flex">
@@ -79,8 +80,10 @@
                         <p style="color: #000;">{{$sanPham->so_luong}} kg trong kho</p>
                         @endif
                         </div>
+                        <input type="hidden" name="id" value="{{$sanPham->id}}">
                     </div>
-                    <p><a href="cart.html" class="btn btn-black py-3 px-5">Thêm vào giỏ</a></p>
+                    <p><a onclick="return themGio()" class="btn btn-black py-3 px-5">Thêm vào giỏ</a></p>
+                </form>
                 </div>
             </div>
         </div>
@@ -126,7 +129,7 @@
                                         class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="ion-ios-menu"></i></span>
                                     </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <a onclick="return buyNow('{{$item->id}}','{{$item->ten}}')" href="/" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="ion-ios-cart"></i></span>
                                     </a>
                                     <a onclick="return wishlist('{{$item->ten}}','{{$item->id}}')" href="/" class="heart d-flex justify-content-center align-items-center ">
@@ -199,6 +202,12 @@
 
         });
     </script>
+    <script>
+        function themGio() {
+            return document.getElementById("them-gio").submit();
+        }
+    </script>
+
 <script>
     function wishlist(ten,id) {
         localStorage.setItem(ten, id);
@@ -220,5 +229,23 @@
         )
         return false;
     }
+</script>
+<script>
+    function buyNow(id,ten){
+    $.get(
+        "/cart/buy-now",
+        {id:id},
+        function(data) {
+            if (data=='add success') {
+                alert('Đã thêm sản phẩm '+ten+ ' vào giỏ hàng!');
+                window.location.reload();
+            }else{
+                alert('Mua nhanh thất bại');
+
+            }
+        }
+    )
+    return false;
+}
 </script>
 @endsection

@@ -12,7 +12,8 @@ class OrderController extends Controller
         $data['donHang'] = don_hang::all();
         return view('backend.order.order',$data);
     }
-    function ctDonHang() {
-        return view('backend.order.detailorder');
+    function ctDonHang($idDonHang) {
+        $data['donHang'] = don_hang::find($idDonHang);
+        return view('backend.order.detailorder',$data);
     }
 }

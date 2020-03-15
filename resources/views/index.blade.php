@@ -153,7 +153,7 @@
                 @foreach ($spNb as $item)
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="/{{$item->link_anh}}"
+                        <a href="/{{$item->link_slug}}-{{$item->id}}.html" class="img-prod"><img class="img-fluid" src="/{{$item->link_anh}}"
                                 alt="Colorlib Template">
                                 @if ($item->giam_gia!='')
                                 <span class="status">{{$item->giam_gia}}%</span>
@@ -161,7 +161,7 @@
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">{{$item->ten}}</a></h3>
+                            <h3><a href="/{{$item->link_slug}}-{{$item->id}}.html">{{$item->ten}}</a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
                                     <p class="price"><span @if ($item->giam_gia!='') class="mr-2 price-dc" @endif>{{number_format($item->gia,0,'','.')}} VND</span>
@@ -173,11 +173,11 @@
                             </div>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a href="#"
+                                    <a href="/{{$item->link_slug}}-{{$item->id}}.html"
                                         class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="ion-ios-menu"></i></span>
                                     </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <a onclick="return buyNow('{{$item->id}}','{{$item->ten}}')" href="/" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="ion-ios-cart"></i></span>
                                     </a>
                                     <a onclick="return wishlist('{{$item->ten}}','{{$item->id}}')" href="/" class="heart d-flex justify-content-center align-items-center ">
@@ -378,5 +378,24 @@
             )
             return false;
         }
+    </script>
+
+    <script>
+        function buyNow(id,ten){
+        $.get(
+            "/cart/buy-now",
+            {id:id},
+            function(data) {
+                if (data=='add success') {
+                    alert('Đã thêm sản phẩm '+ten+ ' vào giỏ hàng!');
+                    window.location.reload();
+                }else{
+                    alert('Mua nhanh thất bại');
+
+                }
+            }
+        )
+        return false;
+    }
     </script>
 @endsection

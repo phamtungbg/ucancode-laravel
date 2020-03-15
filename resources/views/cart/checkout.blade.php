@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-9 ftco-animate text-center">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Trang chủ</a></span> <span>Thanh
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/">Trang chủ</a></span> <span>Thanh
                             toán</span></p>
                     <h1 class="mb-0 bread">Thanh toán</h1>
                 </div>
@@ -64,18 +64,19 @@
                                 <h3 class="billing-heading mb-4">Cart Total</h3>
                                 <p class="d-flex">
                                     <span>Tổng tiền</span>
-                                    <span>$20.60</span>
+                                    <span>{{Cart::total(0,'','.')}} VND</span>
                                 </p>
                                 <p class="d-flex">
                                     <span>Tiền triết khấu</span>
-                                    <span>$3.00</span>
+                                    <span>{{number_format($giamGia,0,'','.')}} VND</span>
                                 </p>
                                 <hr>
                                 <p class="d-flex total-price">
                                     <span>Tổng tiền</span>
-                                    <span>$17.60</span>
+                                    <span>{{number_format($thanhToan,0,'','.')}} VND</span>
                                 </p>
-                                <p><a href="#" class="btn btn-primary py-3 px-4">Place an order</a></p>
+                                <input type="hidden" name="ma_giam_gia" value="{{$maGiamGia}}">
+                            <p><button type="submit" class="btn btn-primary py-3 px-4">Place an order</button></p>
                             </div>
 
                         </div>

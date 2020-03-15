@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-9 ftco-animate text-center">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Trang chủ</a></span> <span>Thanh
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/">Trang chủ</a></span> <span>Thanh
                             toán</span></p>
                     <h1 class="mb-0 bread">Hoàn tất thanh toán</h1>
                 </div>
@@ -27,10 +27,10 @@
             </div>
             <div class="row justify-content-center mb-12 pb-12">
                 <div class="col-md-2">
-                    <p><a href="#" class="btn btn-primary">Quay lại trang chủ</a></p>
+                    <p><a href="/" class="btn btn-primary">Quay lại trang chủ</a></p>
                 </div>
                 <div class="col-md-2">
-                    <p><a href="#" class="btn btn-primary">Tiếp tục mua sắm</a></p>
+                    <p><a href="/shop" class="btn btn-primary">Tiếp tục mua sắm</a></p>
                 </div>
             </div>
         </div>

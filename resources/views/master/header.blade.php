@@ -46,7 +46,7 @@
                 <li class="nav-item"><a href="/blog" class="nav-link">Tin tức</a></li>
                 <li class="nav-item"><a href="/contact" class="nav-link">Liên Hệ</a></li>
             <li class="nav-item cta cta-colored"><a href="/cart" class="nav-link"><span
-                            class="icon-shopping_cart"></span>[0]</a></li>
+                            class="icon-shopping_cart"></span>[{{count(Cart::content())}}]</a></li>
 
             </ul>
         </div>

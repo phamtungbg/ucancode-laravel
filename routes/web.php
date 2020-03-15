@@ -39,9 +39,14 @@ Route::get('{slugSp}.html', 'ShopController@ctSanPham');
 //Cart
 Route::group(['prefix' => 'cart'], function () {
     Route::get('','CartController@gioHang');
+    Route::get('add','CartController@addGioHang');
+    Route::get('buy-now','CartController@muaNgay');
     Route::get('checkout', 'CartController@thanhToan');
     Route::post('checkout', 'CartController@postThanhToan');
     Route::get('complete', 'CartController@hoanThanh');
+    Route::post('giam-gia','CartController@maGiamGia');
+    Route::get('del/{rowId}','CartController@xoaGioHang');
+    Route::get('update/{rowId}/{qty}','CartController@suaGioHang');
 });
 
 
@@ -91,7 +96,7 @@ Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
     //order
     Route::group(['prefix' => 'order'], function () {
         Route::get('', 'backend\OrderController@donHang');
-        Route::get('detail', 'backend\OrderController@ctDonHang');
+        Route::get('detail/{idDonHang}', 'backend\OrderController@ctDonHang');
     });
      //user
      Route::group(['prefix' => 'user'], function () {

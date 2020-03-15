@@ -28,12 +28,14 @@
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
-								<div class="alert bg-success" role="alert">
+								@if (session('thongbao'))
+                                <div class="alert bg-success" role="alert">
 									<svg class="glyph stroked checkmark">
 										<use xlink:href="#stroked-checkmark"></use>
-									</svg>Đã thêm thành công<a href="#" class="pull-right"><span
+									</svg>{{session('thongbao')}}<a href="#" class="pull-right"><span
 											class="glyphicon glyphicon-remove"></span></a>
 								</div>
+                                @endif
 								<a href="/admin/product/add" class="btn btn-primary">Thêm sản phẩm</a>
 								<table class="table table-bordered" style="margin-top:20px;">
 
@@ -77,11 +79,7 @@
 								</table>
 								<div align='right'>
 									<ul class="pagination">
-										<li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
-										<li class="page-item"><a class="page-link" href="#">1</a></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
+										{{$sanPham->links()}}
 									</ul>
 								</div>
 							</div>

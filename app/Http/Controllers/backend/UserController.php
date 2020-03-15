@@ -11,12 +11,12 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     function dsThanhVien() {
-        $data['user'] = User::where('trang_thai',1)->get();
+        $data['user'] = User::where('trang_thai',1)->paginate(5);
         return view('backend.user.listuser',$data);
     }
 
     function dsDangKy() {
-        $data['user'] = User::where('trang_thai',0)->get();
+        $data['user'] = User::where('trang_thai',0)->paginate(5);
         return view('backend.user.register_user',$data);
     }
 

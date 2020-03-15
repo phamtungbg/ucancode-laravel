@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     function sanPham() {
-        $data['sanPham']= san_pham::all();
+        $data['sanPham']= san_pham::paginate(8);
         return view('backend.product.listproduct',$data);
     }
 
@@ -41,7 +41,7 @@ class ProductController extends Controller
             $sanPham->link_anh='upload/no-img.jpg';
         }
         $sanPham->save();
-        return redirect('/admin/product')->with('thongbao','Đã thêm thành công');
+        return redirect('/admin/product')->with('thongao','Đã thêm thành công');
     }
 
     function suaSanPham($idSp) {

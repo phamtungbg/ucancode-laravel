@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 class ShopController extends Controller
 {
     function cuaHang() {
-        $data['sanPham'] = san_pham::where('link_anh','<>','no-img.jpg')->get();
+        $data['sanPham'] = san_pham::where('link_anh','<>','no-img.jpg')->paginate(8);
         $data['danhMuc'] = danh_muc::where('id_cha',1)->get();
         $data['activeDm'] = 0;
         return view('shop.shop',$data);
     }
     function dmCuahang($dmSlug,$dmId){
-        $data['sanPham'] = san_pham::where('link_anh','<>','no-img.jpg')->where('danh_muc_id',$dmId)->get();
+        $data['sanPham'] = san_pham::where('link_anh','<>','no-img.jpg')->where('danh_muc_id',$dmId)->paginate(8);
         $data['danhMuc'] = danh_muc::where('id_cha',1)->get();
         $data['activeDm'] = $dmId;
         return view('shop.shop',$data);

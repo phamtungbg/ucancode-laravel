@@ -14,7 +14,7 @@ class BlogController extends Controller
 {
     function tinTuc(Request $r) {
         // dd($r->all());
-        $data['tinTuc'] = tin_tuc::all();
+        $data['tinTuc'] = tin_tuc::paginate(10);
         return view('backend.blog.blog',$data);
     }
     function themTinTuc() {
